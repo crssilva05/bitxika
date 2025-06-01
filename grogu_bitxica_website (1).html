@@ -914,3 +914,637 @@
         <div id="products" class="page">
             <section class="section">
                 <h2 class="section-title">Nossos Sabores Autênticos
+                    // src/components/Products.tsx (continued)
+0.8, delay: 0.2 }}
+        >
+          Nossos Sabores
+        </motion.h2>
+        <motion.p
+          className="text-xl text-center max-w-2xl mx-auto mb-16 text-gray-600"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          Descubra nossa coleção de ponches artesanais feitos com frutas tropicais autênticas de Cabo Verde
+        </motion.p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map((product, index) => (
+            <motion.div
+              key={index}
+              className={`rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ${
+                hoveredProduct === index ? 'shadow-xl' : 'shadow-md'
+              }`}
+              style={{ backgroundColor: product.colors.light }}
+              onMouseEnter={() => setHoveredProduct(index)}
+              onMouseLeave={() => setHoveredProduct(null)}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+              whileHover={{ y: -10 }}
+            >
+              <div className="relative h-48 flex items-center justify-center">
+                <motion.div
+                  className="text-8xl"
+                  animate={hoveredProduct === index ? { scale: 1.2 } : { scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {product.emoji}
+                </motion.div>
+                <div className="absolute top-4 right-4 bg-white/90 rounded-full px-3 py-1 text-sm font-bold text-primary shadow">
+                  Cabo Verde
+                </div>
+              </div>
+
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2" style={{ color: product.colors.main }}>
+                  {product.name}
+                </h3>
+                <p className="text-gray-700 mb-4">{product.description}</p>
+                
+                <div className="flex justify-between mb-6">
+                  {Object.entries(product.price).map(([size, price]) => (
+                    <div key={size} className="text-center">
+                      <div className="font-bold text-gray-800">{size}</div>
+                      <div className="text-lg font-bold" style={{ color: product.colors.main }}>
+                        {price}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <motion.button
+                  className="w-full py-3 rounded-lg font-bold text-white shadow-md transition-all"
+                  style={{ 
+                    backgroundColor: product.colors.main,
+                    boxShadow: hoveredProduct === index 
+                      ? `0 10px 25px -5px ${product.colors.main}80` 
+                      : '0 4px 6px rgba(0,0,0,0.1)'
+                  }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Adicionar ao Carrinho
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div 
+          className="mt-20 bg-gradient-primary rounded-3xl p-8 md:p-12 text-white text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+        >
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+            Como Servir Grogu Bitxica?
+          </h3>
+          <p className="max-w-3xl mx-auto text-lg mb-6">
+            Nossos ponches são versáteis! Experimente puros com gelo, em cocktails tradicionais caboverdianos 
+            ou como acompanhamento para sobremesas. Cada garrafa inclui sugestões de harmonização.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <span className="bg-white/20 px-4 py-2 rounded-full">Com gelo</span>
+            <span className="bg-white/20 px-4 py-2 rounded-full">Em cocktails</span>
+            <span className="bg-white/20 px-4 py-2 rounded-full">Com sobremesas</span>
+            <span className="bg-white/20 px-4 py-2 rounded-full">Como digestivo</span>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// src/components/WhereToBuy.tsx
+'use client'
+
+import { motion } from 'framer-motion'
+import { MapPin, ShoppingBag, Store, Truck } from 'lucide-react'
+
+export default function WhereToBuy() {
+  const locations = [
+    {
+      name: 'Loja Física - Paris',
+      address: '123 Rue du Ponche, 75001 Paris',
+      hours: 'Seg-Sex: 10h-19h, Sáb: 11h-18h',
+      icon: <Store size={24} />
+    },
+    {
+      name: 'Mercado Caboverdiano',
+      address: 'Mercado de Assomada, Santiago, Cabo Verde',
+      hours: 'Ter-Dom: 8h-18h',
+      icon: <ShoppingBag size={24} />
+    },
+    {
+      name: 'Eventos Especiais',
+      address: 'Festivais culturais e eventos caboverdianos na Europa',
+      hours: 'Datas variadas - Consulte nosso calendário',
+      icon: <MapPin size={24} />
+    }
+  ]
+
+  const onlineStores = [
+    {
+      name: 'Loja Online Grogu Bitxica',
+      description: 'Compre diretamente do produtor com entrega em toda Europa',
+      icon: <Truck size={24} />
+    },
+    {
+      name: 'Mercado Cabo Verde Online',
+      description: 'Plataforma especializada em produtos caboverdianos',
+      icon: <ShoppingBag size={24} />
+    }
+  ]
+
+  return (
+    <section className="min-h-screen py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2 
+          className="text-4xl md:text-6xl font-bold text-center mb-4 bg-gradient-primary bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Onde Comprar
+        </motion.h2>
+        <motion.p
+          className="text-xl text-center max-w-2xl mx-auto mb-16 text-gray-600"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          Encontre nossos ponches artesanais em lojas físicas e online
+        </motion.p>
+
+        <div className="grid lg:grid-cols-2 gap-12 mb-20">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <h3 className="text-2xl font-bold text-primary mb-8 flex items-center gap-3">
+              <MapPin className="text-primary" size={28} />
+              Lojas Físicas
+            </h3>
+            
+            <div className="space-y-6">
+              {locations.map((location, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-primary"
+                  whileHover={{ y: -5 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                >
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 bg-light-gray rounded-full flex items-center justify-center text-primary">
+                      {location.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg mb-1">{location.name}</h4>
+                      <p className="text-gray-600 mb-2">{location.address}</p>
+                      <p className="text-sm font-medium">{location.hours}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <h3 className="text-2xl font-bold text-primary mb-8 flex items-center gap-3">
+              <ShoppingBag className="text-primary" size={28} />
+              Compras Online
+            </h3>
+            
+            <div className="space-y-6">
+              {onlineStores.map((store, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gradient-primary p-6 rounded-2xl text-white"
+                  whileHover={{ y: -5 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                >
+                  <div className="flex gap-4">
+                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                      {store.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg mb-1">{store.name}</h4>
+                      <p className="opacity-90">{store.description}</p>
+                    </div>
+                  </div>
+                  <motion.button
+                    className="mt-4 bg-white text-primary font-bold py-2 px-6 rounded-full"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Visitar Loja
+                  </motion.button>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div 
+          className="bg-light-gray rounded-3xl p-8 md:p-12 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+        >
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+            Entrega Internacional
+          </h3>
+          <p className="max-w-3xl mx-auto text-lg mb-6">
+            Entregamos nossos ponches artesanais em toda a União Europeia e Cabo Verde. 
+            Envios rápidos e seguros para que você possa desfrutar de Grogu Bitxica onde estiver.
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-8 mt-10">
+            {['🇫🇷', '🇵🇹', '🇨🇻', '🇩🇪', '🇳🇱', '🇧🇪', '🇱🇺', '🇪🇸'].map((flag, index) => (
+              <motion.div
+                key={index}
+                className="text-4xl"
+                animate={{ 
+                  y: [0, -15, 0],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity, 
+                  delay: index * 0.3,
+                  ease: "easeInOut" 
+                }}
+              >
+                {flag}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// src/components/Contact.tsx
+'use client'
+
+import { motion } from 'framer-motion'
+import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react'
+import { useState } from 'react'
+
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simulate form submission
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setSubmitSuccess(true)
+      setFormData({ name: '', email: '', message: '' })
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitSuccess(false), 5000)
+    }, 1500)
+  }
+
+  const contactInfo = [
+    {
+      icon: <Mail size={24} />,
+      label: 'Email',
+      value: 'contato@grogubitxica.com',
+      link: 'mailto:contato@grogubitxica.com'
+    },
+    {
+      icon: <Phone size={24} />,
+      label: 'Telefone',
+      value: '+33 123 456 789',
+      link: 'tel:+33123456789'
+    },
+    {
+      icon: <MapPin size={24} />,
+      label: 'Localização',
+      value: 'Paris, França & Assomada, Cabo Verde'
+    },
+    {
+      icon: <Instagram size={24} />,
+      label: 'Instagram',
+      value: '@grogubitxica',
+      link: 'https://instagram.com/grogubitxica'
+    },
+    {
+      icon: <Facebook size={24} />,
+      label: 'Facebook',
+      value: '/grogubitxica',
+      link: 'https://facebook.com/grogubitxica'
+    }
+  ]
+
+  return (
+    <section className="min-h-screen py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2 
+          className="text-4xl md:text-6xl font-bold text-center mb-4 bg-gradient-primary bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Entre em Contato
+        </motion.h2>
+        <motion.p
+          className="text-xl text-center max-w-2xl mx-auto mb-16 text-gray-600"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          Dúvidas, encomendas especiais ou parcerias? Estamos aqui para ajudar!
+        </motion.p>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <h3 className="text-2xl font-bold text-primary mb-8">
+              Informações de Contato
+            </h3>
+            
+            <div className="space-y-6 mb-10">
+              {contactInfo.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="flex gap-4"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                >
+                  <div className="w-12 h-12 bg-light-gray rounded-full flex items-center justify-center text-primary">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="font-semibold">{item.label}</p>
+                    {item.link ? (
+                      <a 
+                        href={item.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-gray-700 hover:text-primary transition-colors"
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="text-gray-700">{item.value}</p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            <motion.div
+              className="bg-gradient-primary rounded-2xl p-6 text-white"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              <h4 className="font-bold text-xl mb-3">Horário de Atendimento</h4>
+              <p className="mb-4">Segunda a Sexta: 9h - 18h (CET)</p>
+              <p>Finais de semana: Encomendas online 24/7</p>
+            </motion.div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <h3 className="text-2xl font-bold text-primary mb-8">
+              Envie uma Mensagem
+            </h3>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <label htmlFor="name" className="block mb-2 font-medium">
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <label htmlFor="email" className="block mb-2 font-medium">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+              >
+                <label htmlFor="message" className="block mb-2 font-medium">
+                  Mensagem
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </motion.div>
+              
+              <motion.button
+                type="submit"
+                className={`w-full py-3 rounded-lg font-bold text-white shadow-md transition-all ${
+                  isSubmitting ? 'bg-gray-400' : 'bg-gradient-to-r from-primary to-primary-light'
+                }`}
+                disabled={isSubmitting}
+                whileHover={{ scale: isSubmitting ? 1 : 1.03 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
+              </motion.button>
+              
+              {submitSuccess && (
+                <motion.div
+                  className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  Mensagem enviada com sucesso! Entraremos em contato em breve.
+                </motion.div>
+              )}
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// src/components/Footer.tsx
+import { motion } from 'framer-motion'
+import { Instagram, Facebook, Twitter, Youtube } from 'lucide-react'
+
+export default function Footer() {
+  const currentYear = new Date().getFullYear()
+  
+  const socialLinks = [
+    { icon: <Instagram size={20} />, url: '#', label: 'Instagram' },
+    { icon: <Facebook size={20} />, url: '#', label: 'Facebook' },
+    { icon: <Twitter size={20} />, url: '#', label: 'Twitter' },
+    { icon: <Youtube size={20} />, url: '#', label: 'YouTube' }
+  ]
+
+  return (
+    <footer className="bg-dark-gray text-white pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div>
+            <motion.div 
+              className="flex items-center text-2xl font-bold text-primary mb-4"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="text-3xl mr-2">🌴</span>
+              Grogu Bitxica
+            </motion.div>
+            <p className="text-light-gray mb-4">
+              Ponche artesanal de Cabo Verde feito com frutas tropicais autênticas e amor.
+            </p>
+            <p className="italic text-light-gray">
+              Di boca pa corason!
+            </p>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-bold mb-4">Links Rápidos</h3>
+            <ul className="space-y-2">
+              {['Nossa História', 'Produtos', 'Onde Comprar', 'Contacto'].map((item, index) => (
+                <motion.li 
+                  key={index}
+                  whileHover={{ x: 5 }}
+                >
+                  <a href="#" className="text-light-gray hover:text-primary transition-colors">
+                    {item}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-bold mb-4">Produtos</h3>
+            <ul className="space-y-2">
+              {['Morango', 'Coco', 'Tamarindo', 'Frutos Vermelhos', 'Manga', 'Calabaceira', 'Framboesa'].map((item, index) => (
+                <motion.li 
+                  key={index}
+                  whileHover={{ x: 5 }}
+                >
+                  <a href="#" className="text-light-gray hover:text-primary transition-colors">
+                    {item}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-bold mb-4">Newsletter</h3>
+            <p className="text-light-gray mb-4">
+              Inscreva-se para receber novidades e promoções exclusivas!
+            </p>
+            <form className="flex">
+              <input 
+                type="email" 
+                placeholder="Seu email" 
+                className="px-4 py-2 rounded-l-lg focus:outline-none text-dark-gray w-full"
+                required
+              />
+              <motion.button 
+                type="submit"
+                className="bg-primary px-4 py-2 rounded-r-lg font-bold"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                OK
+              </motion.button>
+            </form>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-700 pt-8 pb-6 flex flex-col md:flex-row justify-between items-center">
+          <div className="flex space-x-6 mb-4 md:mb-0">
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.url}
+                aria-label={social.label}
+                className="text-light-gray hover:text-primary transition-colors"
+                whileHover={{ y: -5 }}
+              >
+                {social.icon}
+              </motion.a>
+            ))}
+          </div>
+          <p className="text-light-gray text-center md:text-right">
+            &copy; {currentYear} Grogu Bitxica. Todos os direitos reservados.<br />
+            Desenvolvido com ❤️ e 🍹 em Cabo Verde & França
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}
