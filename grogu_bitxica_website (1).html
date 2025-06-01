@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grogu Bitxica - Di boca pa corason! | Ponche Artesanal de Cabo Verde</title>
+    <meta name="description" content="Ponche artesanal de Cabo Verde com frutas tropicais autênticas. Receitas tradicionais de Assomada com toque moderno. Di boca pa corason!">
+    <meta name="keywords" content="ponche, cabo verde, grogu, frutas tropicais, artesanal, silvania silva, assomada">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #4ECDC4;
+            --white: #FFFFFF;
+            --dark-gray: #333333;
+            --light-gray: #f8f9fa;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "🌴";
+            margin-right: 10px;
+            font-size: 2rem;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Main Content */
+        .main {
+            margin-top: 80px;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: -1;
+        }
+
+        .hero-decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .tropical-element {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .tropical-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .tropical-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .tropical-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .tropical-element:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -2px;
+        }
+
+        .hero-slogan {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            margin-bottom: 3rem;
+            font-style: italic;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), #FF8C52);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Story Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .story-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text strong {
+            color: var(--primary-color);
+        }
+
+        .story-quote {
+            background: linear-gradient(135deg, var(--light-gray), rgba(78, 205, 196, 0.1));
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        .story-image {
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cape-verde-flag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                #003893 0%, #003893 20%,
+                #FFFFFF 20%, #FFFFFF 30%,
+                #CE1126 30%, #CE1126 40%,
+                #FFFFFF 40%, #FFFFFF 50%,
+                #003893 50%, #003893 60%,
+                #FFFFFF 60%, #FFFFFF 70%,
+                #CE1126 70%, #CE1126 80%,
+                #FFFFFF 80%, #FFFFFF 90%,
+                #003893 90%, #003893 100%);
+            opacity: 0.3;
+        }
+
+        .production-process {
+            margin-top: 4rem;
+            background: var(--light-gray);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .process-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .process-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            color: white;
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--product-primary), var(--product-secondary));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(45deg, var(--product-primary), var(--product-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.1));
+        }
+
+        .product-info {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+
+        /* Product Colors */
+        .morango { --product-primary: #E74C3C; --product-secondary: #F1948A; }
+        .coco { --product-primary: #D2B48C; --product-secondary: #F5DEB3; }
+        .tamarindo { --product-primary: #FF8C00; --product-secondary: #FFB347; }
+        .frutos-vermelhos { --product-primary: #8B0000; --product-secondary: #CD5C5C; }
+        .manga { --product-primary: #FFD700; --product-secondary: #FFFF99; }
+        .calabaceira { --product-primary: #9ACD32; --product-secondary: #ADFF2F; }
+        .framboesa { --product-primary: #C2185B; --product-secondary: #F8BBD9; }
+
+        /* Map Section */
+        .map-container {
+            height: 500px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .map-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #666;
+        }
+
+        .map-points {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .map-point::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 107, 53, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { width: 0; height: 0; opacity: 1; }
+            100% { width: 60px; height: 60px; opacity: 0; }
+        }
+
+        .map-point:hover {
+            transform: scale(1.3);
+            z-index: 20;
+        }
+
+        .distributors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .distributor-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .distributor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .distributor-flag {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .distributor-name {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        }
+
+        .contact-info {
+            background: var(--light-gray);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        .qr-section {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background: var(--dark-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: var(--border-radius);
+            margin: 1rem auto;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .story-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .distributors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo" onclick="showPage('home')">Grogu Bitxica</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="nav-link active">Início</a></li>
+                <li><a href="#" onclick="showPage('story')" class="nav-link">Nossa História</a></li>
+                <li><a href="#" onclick="showPage('products')" class="nav-link">Produtos</a></li>
+                <li><a href="#" onclick="showPage('where-buy')" class="nav-link">Onde Comprar</a></li>
+                <li><a href="#" onclick="showPage('contact')" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-decorations">
+                    <div class="tropical-element">🥭</div>
+                    <div class="tropical-element">🥥</div>
+                    <div class="tropical-element">🍓</div>
+                    <div class="tropical-element">🌺</div>
+                </div>
+                <div class="hero-content">
+                    <h1>Grogu Bitxica</h1>
+                    <p class="hero-slogan">Di boca pa corason!</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">
+                            🛒 Comprar Agora
+                        </a>
+                        <a href="#" onclick="showPage('products')" class="btn btn-secondary">
+                            🍹 Ver Sabores
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- STORY PAGE -->
+        <div id="story" class="page">
+            <section class="section">
+                <h2 class="section-title">Nossa História</h2>
+                <div class="story-grid">
+                    <div class="story-text">
+                        <p><strong>Grogu Bitxica</strong> nasceu das memórias de infância de <strong>Silvania Silva</strong> em Assomada, Cabo Verde, onde o ponche artesanal era protagonista nas festas familiares.</p>
+                        
+                        <p>Ao emigrar para França, Silvania decidiu recriar essas receitas tradicionais com um toque moderno, usando frutas tropicais autênticas de Cabo Verde.</p>
+                        
+                        <p>Cada garrafa carrega o calor da cultura caboverdiana e a paixão por sabores intensos, elaborada artesanalmente em pequenos lotes com frutas cuidadosamente selecionadas das ilhas.</p>
+                        
+                        <div class="story-quote">
+                            <p><em>"Cada gole é uma viagem de volta às minhas raízes, às tardes quentes de Assomada e ao sabor único da nossa terra. O ponche não é apenas uma bebida, é um pedaço da nossa alma caboverdiana."</em></p>
+                            <p><strong>- Silvania Silva, Fundadora</strong></p>
+                        </div>
+                    </div>
+                    <div class="story-image">
+                        <div class="cape-verde-flag"></div>
+                        🇨🇻
+                    </div>
+                </div>
+                
+                <div class="production-process">
+                    <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center; font-size: 1.5rem;">Processo de Produção Artesanal</h3>
+                    <div class="process-grid">
+                        <div class="process-item">
+                            <div class="process-icon">✨</div>
+                            <div>
+                                <h4>Pequenos Lotes</h4>
+                                <p>Elaboração artesanal em pequenos lotes para garantir qualidade máxima</p>
+                            </div>
+                        </div>
+                        <div class="process-item">
+                            <div class="process-icon">🥭</div>
+                            <div>
+                                <h4>Frutas Selecionadas</h4>
+                                <p>Manga de São Vicente, coco de Boa Vista e outras frutas tropicais autênticas</p>
+                            </div>
+                        </div>
+                        <div class="process-item">
+                            <div class="process-icon">⏰</div>
+                            <div>
+                                <h4>Maturação Controlada</h4>
+                                <p>Processo cuidadoso para equilibrar perfeitamente doçura e acidez</p>
+                            </div>
+                        </div>
+                        <div class="process-item">
+                            <div class="process-icon">🌱</div>
+                            <div>
+                                <h4>100% Natural</h4>
+                                <p>Sem conservantes artificiais, mantendo a pureza dos sabores tradicionais</p>
+                            </div>
+                        </div>
+                        <div class="process-item">
+                            <div class="process-icon">🍹</div>
+                            <div>
+                                <h4>Versátil</h4>
+                                <p>Perfeito puro ou como base para cocktails tradicionais caboverdianos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PRODUCTS PAGE -->
+        <div id="products" class="page">
+            <section class="section">
+                <h2 class="section-title">Nossos Sabores Autênticos
